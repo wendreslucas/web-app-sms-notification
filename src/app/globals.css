@@ -1,0 +1,140 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design tokens. Every colour the console uses is defined here and nowhere
+ * else: components refer to these names, never to raw values.
+ *
+ * The palette follows the Carlton One site: a vibrant azure for primary
+ * actions and highlights, charcoal for type, and a warm off-white ground with
+ * white surfaces. The console keeps a language of its own rather than copying
+ * the corporate site.
+ */
+:root {
+  --radius: 0.625rem;
+
+  /* Brand, sampled from the official logo file */
+  --carlton-blue: #00a4ff;
+  --carlton-blue-deep: #0088d6;
+  --carlton-charcoal: #343333;
+  --carlton-sand: #f6f3f0;
+
+  /* Surfaces and text (light: the site's own look) */
+  --background: var(--carlton-sand);
+  --surface: #ffffff;
+  --surface-hover: #f1ede8;
+  --border: #e7e2dc;
+  --input: #d9d3cc;
+  --text-primary: var(--carlton-charcoal);
+  --text-secondary: #5f6368;
+
+  /* Message status, tuned for contrast on light surfaces */
+  --status-neutral: #5f6368;
+  --status-info: #0079c2;
+  --status-sent: #6d3fea;
+  --status-success: #0f8a5f;
+  --status-warning: #a36a12;
+  --status-danger: #d92d20;
+  --status-critical: #b42318;
+
+  /* Component roles, expressed in terms of the tokens above */
+  --foreground: var(--text-primary);
+  --card: var(--surface);
+  --card-foreground: var(--text-primary);
+  --popover: var(--surface);
+  --popover-foreground: var(--text-primary);
+  /*
+   * Filled buttons use the brand azure with white text, as the site does.
+   * That pairing sits near 2.7:1 contrast; switch --primary to
+   * --carlton-blue-deep if stricter legibility matters more than fidelity.
+   */
+  --primary: var(--carlton-blue);
+  --primary-hover: var(--carlton-blue-deep);
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface-hover);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--surface-hover);
+  --muted-foreground: var(--text-secondary);
+  --accent: var(--surface-hover);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--status-danger);
+  --ring: var(--carlton-blue);
+}
+
+/* Dark: charcoal grounds taken from the wordmark, same azure accent. */
+.dark {
+  --background: #141619;
+  --surface: #1c1f23;
+  --surface-hover: #252a2f;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.14);
+  --text-primary: var(--carlton-sand);
+  --text-secondary: #a8adb4;
+
+  /* Lighter tints so status text stays readable on charcoal */
+  --status-neutral: #a8adb4;
+  --status-info: var(--carlton-blue);
+  --status-sent: #a38bff;
+  --status-success: #34d399;
+  --status-warning: #fbbf24;
+  --status-danger: #f87171;
+  --status-critical: #ff6b6b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+
+  --color-carlton-blue: var(--carlton-blue);
+  --color-carlton-blue-deep: var(--carlton-blue-deep);
+  --color-carlton-charcoal: var(--carlton-charcoal);
+  --color-carlton-sand: var(--carlton-sand);
+
+  --color-status-neutral: var(--status-neutral);
+  --color-status-info: var(--status-info);
+  --color-status-sent: var(--status-sent);
+  --color-status-success: var(--status-success);
+  --color-status-warning: var(--status-warning);
+  --color-status-danger: var(--status-danger);
+  --color-status-critical: var(--status-critical);
+
+  --font-sans: var(--font-montserrat);
+  --font-mono: var(--font-geist-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
